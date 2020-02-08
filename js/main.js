@@ -8,7 +8,8 @@ $(document).ready(function(){
 	// var _timer = setTimeout(move, tempo);
 	
 	var ball = new Ball(35, 45, 1, maxX, maxY, velocity);
-	ball.move();
+	setTimeout(function() {console.log('x')}, 10000)
+	// ball.move();
 
 	$('#field').css('height', maxY);
 	$('#field').css('width', maxX);

@@ -8,7 +8,7 @@ class Ball {
 		this._limitX = limitX;
 		this._limitY = limitY;
 		this._velocity = velocity;
-		this._timer = setTimeout(this.move(), this._velocity);
+		this._timer = setTimeout(function() { this.move() }, 3000); // teste
 	}
 
 	get x() {
