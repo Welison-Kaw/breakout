@@ -4,18 +4,22 @@ $(document).ready(function(){
 	var maxX = 150;
 	var tempo = 10;
 	var objBall = $('#ball');
-	var _timer = setTimeout(move, tempo);
+	var velocity = $('#velocity').val();
 	
-	var ball = new Ball(35, 45, 1, maxX, maxY);
+	var ball = new Ball(35, 45, 1, maxX, maxY, velocity, objBall);
+
+	ball.move();
 
 	$('#field').css('height', maxY);
 	$('#field').css('width', maxX);
 
-	function move() {
-		ball.move();
-		objBall.css('left', ball.x);
-		objBall.css('top', ball.y);
-		_timer = setTimeout(move, tempo);
-	}
+	$('#velocity').change(function() {
+		console.log($(this).val());
+	})
+
+	$('#ballSize').change(function(){
+		console.log($(this).val());
+	})
+
 })
 
