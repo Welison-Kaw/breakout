@@ -1,12 +1,14 @@
 class Ball {
-	constructor (x, y, increment, limitX, limitY) {
+	constructor (x, y, increment, limitX, limitY, velocity) {
 		this._x = x;
 		this._y = y;
 		this._increment = increment;
 		this._directionX = 1;
 		this._directionY = 1;
 		this._limitX = limitX;
-		this._limitY = limitY;		
+		this._limitY = limitY;
+		this._velocity = velocity;
+		this._timer = setTimeout(this.move(), this._velocity);
 	}
 
 	get x() {
@@ -47,5 +49,8 @@ class Ball {
 		this._x += this._increment * this._directionX;
 		this._y += this._increment * this._directionY;
 
+		// this._timer = setTimeout(this.move(), this._velocity);
+
+		console.log('move');
 	}
 }
