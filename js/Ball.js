@@ -1,5 +1,5 @@
 class Ball {
-	constructor (x, y, increment, limitX, limitY, velocity) {
+	constructor (x, y, increment, limitX, limitY, velocity, objBall) {
 		this._x = x;
 		this._y = y;
 		this._increment = increment;
@@ -8,7 +8,8 @@ class Ball {
 		this._limitX = limitX;
 		this._limitY = limitY;
 		this._velocity = velocity;
-		this._timer = setTimeout(function() { this.move() }, 3000); // teste
+		this._objBall = objBall
+		this._timer = null;
 	}
 
 	get x() {
@@ -49,8 +50,9 @@ class Ball {
 		this._x += this._increment * this._directionX;
 		this._y += this._increment * this._directionY;
 
-		// this._timer = setTimeout(this.move(), this._velocity);
+		this._objBall.css('left', this._x);
+		this._objBall.css('top', this._y);
 
-		console.log('move');
+		this._timer = setTimeout(this.move.bind(this), this._velocity);
 	}
 }
