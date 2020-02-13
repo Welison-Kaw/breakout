@@ -53,6 +53,7 @@ class Ball {
 		this._objBall.css('left', this._x);
 		this._objBall.css('top', this._y);
 
-		this._timer = setTimeout(this.move.bind(this), this._velocity);
+		//this._timer = setTimeout(this.move.bind(this), this._velocity);
+		this._timer = requestAnimationFrame(this.move.bind(this));
 	}
 }
