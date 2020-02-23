@@ -1,4 +1,5 @@
 class Ball {
+	// declara propriedades
 	#x = null;
 	#y = null;
 	#increment = null;
@@ -12,6 +13,7 @@ class Ball {
 	#objBall = null;
 
 	constructor (x, y, increment, velocity, directionX, directionY, parent) {
+		// define propriedades
 		this.#x = x;
 		this.#y = y;
 		this.#increment = increment;
@@ -19,10 +21,11 @@ class Ball {
 		this.#directionY = directionY;
 		this.#velocity = velocity;
 		this.#timer = null;
-		this.#parent = parent;
-		this.#limitX = this.#parent.width + this.#parent.x;
-		this.#limitY = this.#parent.height + this.#parent.y;
+		this.#parent = parent; // objeto jaula
+		this.#limitX = this.#parent.width + this.#parent.x; // limite da jaula em largura
+		this.#limitY = this.#parent.height + this.#parent.y; // limite da jaula em altura
 
+		// Cria o elemento no body
 		this.#objBall = document.createElement("canvas");
 		this.#objBall.style.position = 'absolute';
 		this.#objBall.width = this.#parent.width+this.#parent.x+1;
@@ -31,6 +34,7 @@ class Ball {
 		document.body.insertBefore(this.#objBall, null);
 	}
 
+	// getters
 	get x() {
 		return this.#x;
 	}
@@ -47,6 +51,8 @@ class Ball {
 		return this.#directionY;
 	}
 
+
+	// métodos para mudar a direção da bola
 	changeDirectionX() {
 		this.#directionX *= -1;
 	}
@@ -55,6 +61,7 @@ class Ball {
 		this.#directionY *= -1;
 	}
 
+	// método recursivo que move a bola
 	move() {
 		var ctx = this.#objBall.getContext("2d");
 		ctx.beginPath();
