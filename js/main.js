@@ -16,8 +16,8 @@ $(document).ready(function(){
 
 	ball.move();
 
-	$('#field').css('height', maxY);
-	$('#field').css('width', maxX);
+	$('#cage').css('height', maxY);
+	$('#cage').css('width', maxX);
 
 	$('#velocity').change(function() {
 		console.log($(this).val());
