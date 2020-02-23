@@ -1,5 +1,5 @@
 class Ball {
-	constructor (x, y, increment, limitX, limitY, velocity, objBall) {
+	constructor (x, y, increment, limitX, limitY, velocity, parent) {
 		this._x = x;
 		this._y = y;
 		this._increment = increment;
@@ -8,8 +8,15 @@ class Ball {
 		this._limitX = limitX;
 		this._limitY = limitY;
 		this._velocity = velocity;
-		this._objBall = objBall
 		this._timer = null;
+		this._parent = parent;
+
+		this._objBall = document.createElement("canvas");
+		this._objBall.style.position = 'absolute';
+		document.body.insertBefore(this._objBall, null);
+
+		// console.log('x');
+		console.log(this._parent.x);
 	}
 
 	get x() {
@@ -37,8 +44,8 @@ class Ball {
 	}
 
 	move() {
-		//var ctx = this._objBall.getContext("2d");
-		var ctx = document.getElementById("ball").getContext("2d");
+		// var ctx = document.getElementById("ball").getContext("2d");
+		var ctx = this._objBall.getContext("2d");
 		ctx.beginPath();
 		ctx.clearRect(this._x-5,this._y-5,10, 10);
 		// console.log('X1:' + (this._x-4) + ' | Y1: ' + (this._y-4) + ' | X2: ' + (this._x+4) + ' | Y2: ' + (this._y+4));
