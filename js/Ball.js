@@ -9,26 +9,26 @@ class Ball {
 	#velocity = null;
 	#timer = null;
 	#parent = null;
+	#objBall = null;
 
-
-	constructor (x, y, increment, limitX, limitY, velocity, parent) {
+	constructor (x, y, increment, velocity, directionX, directionY, parent) {
 		this.#x = x;
 		this.#y = y;
 		this.#increment = increment;
-		this.#directionX = 1;
-		this.#directionY = 1;
-		this.#limitX = limitX;
-		this.#limitY = limitY;
+		this.#directionX = directionX;
+		this.#directionY = directionY;
 		this.#velocity = velocity;
 		this.#timer = null;
 		this.#parent = parent;
+		this.#limitX = this.#parent.width + this.#parent.x;
+		this.#limitY = this.#parent.height + this.#parent.y;
 
-		this._objBall = document.createElement("canvas");
-		this._objBall.style.position = 'absolute';
-		document.body.insertBefore(this._objBall, null);
+		this.#objBall = document.createElement("canvas");
+		this.#objBall.style.position = 'absolute';
+		this.#objBall.width = this.#parent.width+this.#parent.x+1;
+		this.#objBall.height = this.#parent.height+this.#parent.y+1;
 
-		// console.log('x');
-		console.log(this.#parent);
+		document.body.insertBefore(this.#objBall, null);
 	}
 
 	get x() {
@@ -56,26 +56,23 @@ class Ball {
 	}
 
 	move() {
-		// var ctx = document.getElementById("ball").getContext("2d");
-		var ctx = this._objBall.getContext("2d");
+		var ctx = this.#objBall.getContext("2d");
 		ctx.beginPath();
 		ctx.clearRect(this.#x-5,this.#y-5,10, 10);
-		// console.log('X1:' + (this.#x-4) + ' | Y1: ' + (this.#y-4) + ' | X2: ' + (this.#x+4) + ' | Y2: ' + (this.#y+4));
 
-		if ((this.#x + this.#increment > this.#limitX && this.#directionX ==   1) ||
-			(this.#x - this.#increment < 0            && this.#directionX == - 1)) {
+		if ((this.#x + this.#increment > this.#limitX   && this.#directionX ==   1) ||
+			(this.#x - this.#increment < this.#parent.x && this.#directionX == - 1)) {
 				this.#directionX *= -1;
 		}
 
-		if ((this.#y + this.#increment > this.#limitY && this.#directionY ==   1) ||
-			(this.#y - this.#increment < 0            && this.#directionY == - 1)) {
+		if ((this.#y + this.#increment > this.#limitY   && this.#directionY ==   1) ||
+			(this.#y - this.#increment < this.#parent.y && this.#directionY == - 1)) {
 				this.#directionY *= -1;
 		}
 
 		this.#x += this.#increment * this.#directionX;
 		this.#y += this.#increment * this.#directionY;
 
-		//this.#timer = setTimeout(this.move.bind(this), this.#velocity);
 		ctx.arc(this.#x,this.#y,5,0,Math.PI*2);
 		ctx.fill();		
 		this.#timer = requestAnimationFrame(this.move.bind(this));

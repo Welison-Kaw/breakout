@@ -14,10 +14,9 @@ class Cage {
 
 		this.#objCage = document.createElement("canvas");
 		this.#objCage.style.position = 'absolute';
+		this.#objCage.width = width+x+1;
+		this.#objCage.height = height+y+1;
 		document.body.insertBefore(this.#objCage, null);
-
-		this.#ball.push(new Ball(this.#x+10, this.#y+10, 1, this.#width, this.#height, 5, this));
-		this.#ball[0].move();
 
 		this.draw();
 	}
@@ -37,11 +36,16 @@ class Cage {
 		return this.#y;
 	}
 
-	get with() {
+	get width() {
 		return this.#width;
 	}
 
 	get height() {
 		return this.#height;
+	}
+
+	addBall(x, y, directionX, directionY) {
+		this.#ball.push(new Ball(this.#x+x, this.#y+y, 1, 5, directionX, directionY, this));
+		this.#ball[this.#ball.length-1].move();
 	}
 }
