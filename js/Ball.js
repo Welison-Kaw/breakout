@@ -30,7 +30,6 @@ class Ball {
 		this.#objBall.style.position = 'absolute';
 		this.#objBall.width = this.#parent.width+this.#parent.x+10;
 		this.#objBall.height = this.#parent.height+this.#parent.y+10;
-
 		document.body.insertBefore(this.#objBall, null);
 	}
 
@@ -65,8 +64,11 @@ class Ball {
 	move() {
 		var ctx = this.#objBall.getContext("2d");
 		ctx.beginPath();
+
+		// limpa o desenho atual da bola
 		ctx.clearRect(this.#x-this.#radius,this.#y-this.#radius,this.#radius*2,this.#radius*2);
 
+		// calcula se ela irá bater na parede e mudar de direção
 		if ((this.#x + this.#increment-2 > this.#limitX-this.#radius   && this.#directionX ==   1) ||
 			(this.#x - this.#increment+2 < this.#parent.x+this.#radius && this.#directionX == - 1)) {
 				this.#directionX *= -1;
@@ -77,11 +79,15 @@ class Ball {
 				this.#directionY *= -1;
 		}
 
+		// muda a posição X e Y para mover a bola
 		this.#x += this.#increment * this.#directionX;
 		this.#y += this.#increment * this.#directionY;
 
+		// desenha a bola
 		ctx.arc(this.#x,this.#y,this.#radius,0,Math.PI*2);
-		ctx.fill();		
+		ctx.fill();
+
+		// animação
 		this.#timer = requestAnimationFrame(this.move.bind(this));
 	}
 }
