@@ -51,7 +51,7 @@ class Cage {
 
 	// método para adicionar uma nova bola
 	addBall(x, y, directionX, directionY) {
-		this.#ball.push(new Ball(this.#x+x, this.#y+y, 1, 5, directionX, directionY, 20, this));
+		this.#ball.push(new Ball(this.#x+x, this.#y+y, 1, directionX, directionY, 20, this));
 		this.#ball[this.#ball.length-1].move();
 	}
 }

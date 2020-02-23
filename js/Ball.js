@@ -7,20 +7,18 @@ class Ball {
 	#directionY = null;
 	#limitX = null;
 	#limitY = null;
-	#velocity = null;
 	#radius = null;
 	#timer = null;
 	#parent = null;
 	#objBall = null;
 
-	constructor (x, y, increment, velocity, directionX, directionY, radius, parent) {
+	constructor (x, y, increment, directionX, directionY, radius, parent) {
 		// define propriedades
 		this.#x = x;
 		this.#y = y;
 		this.#increment = increment;
 		this.#directionX = directionX;
 		this.#directionY = directionY;
-		this.#velocity = velocity;
 		this.#radius = radius;
 		this.#timer = null;
 		this.#parent = parent; // objeto jaula
