@@ -1,9 +1,10 @@
 class Cage {
-	#x = 0;
-	#y = 0;
-	#width = 0;
-	#height = 0;
+	#x = null;
+	#y = null;
+	#width = null;
+	#height = null;
 	#objCage = null;
+	#ball = [];
 
 	constructor (x, y, width, height) {
 		this.#x = x;
@@ -15,14 +16,13 @@ class Cage {
 		this.#objCage.style.position = 'absolute';
 		document.body.insertBefore(this.#objCage, null);
 
-		this._ball = new Ball(this.#x+10, this.#y+10, 1, this.#width, this.#height, 5, this);
-		this._ball.move();
+		this.#ball.push(new Ball(this.#x+10, this.#y+10, 1, this.#width, this.#height, 5, this));
+		this.#ball[0].move();
 
-		this._draw();
-		// console.log(this);
+		this.draw();
 	}
 
-	_draw() {
+	draw() {
 		var ctx = this.#objCage.getContext('2d')
 		ctx.beginPath();
 		ctx.rect(this.#x,this.#y,this.#width,this.#height);

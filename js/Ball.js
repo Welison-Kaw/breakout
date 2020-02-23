@@ -1,71 +1,83 @@
 class Ball {
+	#x = null;
+	#y = null;
+	#increment = null;
+	#directionX = null;
+	#directionY = null;
+	#limitX = null;
+	#limitY = null;
+	#velocity = null;
+	#timer = null;
+	#parent = null;
+
+
 	constructor (x, y, increment, limitX, limitY, velocity, parent) {
-		this._x = x;
-		this._y = y;
-		this._increment = increment;
-		this._directionX = 1;
-		this._directionY = 1;
-		this._limitX = limitX;
-		this._limitY = limitY;
-		this._velocity = velocity;
-		this._timer = null;
-		this._parent = parent;
+		this.#x = x;
+		this.#y = y;
+		this.#increment = increment;
+		this.#directionX = 1;
+		this.#directionY = 1;
+		this.#limitX = limitX;
+		this.#limitY = limitY;
+		this.#velocity = velocity;
+		this.#timer = null;
+		this.#parent = parent;
 
 		this._objBall = document.createElement("canvas");
 		this._objBall.style.position = 'absolute';
 		document.body.insertBefore(this._objBall, null);
 
 		// console.log('x');
-		console.log(this._parent.x);
+		console.log(this.#parent);
 	}
 
 	get x() {
-		return this._x;
+		return this.#x;
 	}
 
 	get y() {
-		return this._y;
+		return this.#y;
 	}
 
 	get directionX() {
-		return this._directionX;
+		return this.#directionX;
 	}
 
 	get directionY() {
-		return this._directionY;
+		return this.#directionY;
 	}
 
 	changeDirectionX() {
-		this._directionX *= -1;
+		this.#directionX *= -1;
 	}
 
 	changeDirectionY() {
-		this._directionY *= -1;
+		this.#directionY *= -1;
 	}
 
 	move() {
 		// var ctx = document.getElementById("ball").getContext("2d");
 		var ctx = this._objBall.getContext("2d");
 		ctx.beginPath();
-		ctx.clearRect(this._x-5,this._y-5,10, 10);
-		// console.log('X1:' + (this._x-4) + ' | Y1: ' + (this._y-4) + ' | X2: ' + (this._x+4) + ' | Y2: ' + (this._y+4));
+		ctx.clearRect(this.#x-5,this.#y-5,10, 10);
+		// console.log('X1:' + (this.#x-4) + ' | Y1: ' + (this.#y-4) + ' | X2: ' + (this.#x+4) + ' | Y2: ' + (this.#y+4));
 
-		if ((this._x + this._increment > this._limitX && this._directionX ==   1) ||
-			(this._x - this._increment < 0            && this._directionX == - 1)) {
-				this._directionX *= -1;
+		if ((this.#x + this.#increment > this.#limitX && this.#directionX ==   1) ||
+			(this.#x - this.#increment < 0            && this.#directionX == - 1)) {
+				this.#directionX *= -1;
 		}
 
-		if ((this._y + this._increment > this._limitY && this._directionY ==   1) ||
-			(this._y - this._increment < 0            && this._directionY == - 1)) {
-				this._directionY *= -1;
+		if ((this.#y + this.#increment > this.#limitY && this.#directionY ==   1) ||
+			(this.#y - this.#increment < 0            && this.#directionY == - 1)) {
+				this.#directionY *= -1;
 		}
 
-		this._x += this._increment * this._directionX;
-		this._y += this._increment * this._directionY;
+		this.#x += this.#increment * this.#directionX;
+		this.#y += this.#increment * this.#directionY;
 
-		//this._timer = setTimeout(this.move.bind(this), this._velocity);
-		ctx.arc(this._x,this._y,5,0,Math.PI*2);
+		//this.#timer = setTimeout(this.move.bind(this), this.#velocity);
+		ctx.arc(this.#x,this.#y,5,0,Math.PI*2);
 		ctx.fill();		
-		this._timer = requestAnimationFrame(this.move.bind(this));
+		this.#timer = requestAnimationFrame(this.move.bind(this));
 	}
 }
