@@ -17,8 +17,8 @@ class Cage {
 		// cria elemento no body
 		this.#objCage = document.createElement("canvas");
 		this.#objCage.style.position = 'absolute';
-		this.#objCage.width = width+x+1;
-		this.#objCage.height = height+y+1;
+		this.#objCage.width = width+x+10;
+		this.#objCage.height = height+y+10;
 		document.body.insertBefore(this.#objCage, null);
 
 		// desenha jaula
@@ -51,7 +51,7 @@ class Cage {
 
 	// método para adicionar uma nova bola
 	addBall(x, y, directionX, directionY) {
-		this.#ball.push(new Ball(this.#x+x, this.#y+y, 1, 5, directionX, directionY, this));
+		this.#ball.push(new Ball(this.#x+x, this.#y+y, 1, 5, directionX, directionY, 20, this));
 		this.#ball[this.#ball.length-1].move();
 	}
 }

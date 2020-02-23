@@ -8,11 +8,12 @@ class Ball {
 	#limitX = null;
 	#limitY = null;
 	#velocity = null;
+	#radius = null;
 	#timer = null;
 	#parent = null;
 	#objBall = null;
 
-	constructor (x, y, increment, velocity, directionX, directionY, parent) {
+	constructor (x, y, increment, velocity, directionX, directionY, radius, parent) {
 		// define propriedades
 		this.#x = x;
 		this.#y = y;
@@ -20,6 +21,7 @@ class Ball {
 		this.#directionX = directionX;
 		this.#directionY = directionY;
 		this.#velocity = velocity;
+		this.#radius = radius;
 		this.#timer = null;
 		this.#parent = parent; // objeto jaula
 		this.#limitX = this.#parent.width + this.#parent.x; // limite da jaula em largura
@@ -28,8 +30,8 @@ class Ball {
 		// Cria o elemento no body
 		this.#objBall = document.createElement("canvas");
 		this.#objBall.style.position = 'absolute';
-		this.#objBall.width = this.#parent.width+this.#parent.x+1;
-		this.#objBall.height = this.#parent.height+this.#parent.y+1;
+		this.#objBall.width = this.#parent.width+this.#parent.x+10;
+		this.#objBall.height = this.#parent.height+this.#parent.y+10;
 
 		document.body.insertBefore(this.#objBall, null);
 	}
@@ -65,22 +67,22 @@ class Ball {
 	move() {
 		var ctx = this.#objBall.getContext("2d");
 		ctx.beginPath();
-		ctx.clearRect(this.#x-5,this.#y-5,10, 10);
+		ctx.clearRect(this.#x-this.#radius,this.#y-this.#radius,this.#radius*2,this.#radius*2);
 
-		if ((this.#x + this.#increment > this.#limitX   && this.#directionX ==   1) ||
-			(this.#x - this.#increment < this.#parent.x && this.#directionX == - 1)) {
+		if ((this.#x + this.#increment-2 > this.#limitX-this.#radius   && this.#directionX ==   1) ||
+			(this.#x - this.#increment+2 < this.#parent.x+this.#radius && this.#directionX == - 1)) {
 				this.#directionX *= -1;
 		}
 
-		if ((this.#y + this.#increment > this.#limitY   && this.#directionY ==   1) ||
-			(this.#y - this.#increment < this.#parent.y && this.#directionY == - 1)) {
+		if ((this.#y + this.#increment-2 > this.#limitY-this.#radius   && this.#directionY ==   1) ||
+			(this.#y - this.#increment+2 < this.#parent.y+this.#radius && this.#directionY == - 1)) {
 				this.#directionY *= -1;
 		}
 
 		this.#x += this.#increment * this.#directionX;
 		this.#y += this.#increment * this.#directionY;
 
-		ctx.arc(this.#x,this.#y,5,0,Math.PI*2);
+		ctx.arc(this.#x,this.#y,this.#radius,0,Math.PI*2);
 		ctx.fill();		
 		this.#timer = requestAnimationFrame(this.move.bind(this));
 	}
