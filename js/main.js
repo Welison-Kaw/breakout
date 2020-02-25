@@ -5,6 +5,10 @@ $(document).ready(function(){
 	cage.addBall(77,90,1,-1);
 	cage.addBall(50,55,-1,-1);
 
-	console.log(Math.sin(Math.PI/2));
+	//cage.addPaddle(position, width, height, margin, moveA, moveB);
+	cage.addPaddle(1, 70, 5, 5, null, null, this);
+	cage.addPaddle(2, 70, 5, 5, null, null, this);
+	cage.addPaddle(3, 70, 5, 5, null, null, this);
+	cage.addPaddle(4, 70, 5, 5, null, null, this);
 })
 

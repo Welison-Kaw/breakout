@@ -6,6 +6,7 @@ class Cage {
 	#height = null;
 	#objCage = null;
 	#ball = [];
+	#paddle = [];
 
 	constructor (x, y, width, height) {
 		// define propriedades
@@ -53,5 +54,9 @@ class Cage {
 	addBall(x, y, directionX, directionY) {
 		this.#ball.push(new Ball(this.#x+x, this.#y+y, 1, directionX, directionY, 20, this));
 		this.#ball[this.#ball.length-1].move();
+	}
+
+	addPaddle(position, width, height, margin, moveA, moveB) {
+		this.#paddle.push(new Paddle(position, width, height, margin, moveA, moveB, this));
 	}
 }
