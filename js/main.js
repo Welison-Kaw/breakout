@@ -4,5 +4,7 @@ $(document).ready(function(){
 	cage.addBall(107,50,-1,1);
 	cage.addBall(77,90,1,-1);
 	cage.addBall(50,55,-1,-1);
+
+	console.log(Math.sin(Math.PI/2));
 })
 
