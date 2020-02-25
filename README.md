@@ -1,2 +1,2 @@
-# pong
- JS Pong Game
+# breakout
+ JS Breakout Game
