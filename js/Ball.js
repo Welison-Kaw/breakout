@@ -11,6 +11,7 @@ class Ball {
 	#timer = null;
 	#parent = null;
 	#objBall = null;
+	#angle = null;
 
 	constructor (x, y, increment, directionX, directionY, radius, parent) {
 		// define propriedades
@@ -24,6 +25,8 @@ class Ball {
 		this.#parent = parent; // objeto jaula
 		this.#limitX = this.#parent.width + this.#parent.x; // limite da jaula em largura
 		this.#limitY = this.#parent.height + this.#parent.y; // limite da jaula em altura
+
+		this.#angle = 0.8; // temporário para testes
 
 		// Cria o elemento no body
 		this.#objBall = document.createElement("canvas");
@@ -66,7 +69,7 @@ class Ball {
 		ctx.beginPath();
 
 		// limpa o desenho atual da bola
-		ctx.clearRect(this.#x-this.#radius,this.#y-this.#radius,this.#radius*2,this.#radius*2);
+		ctx.clearRect(0,0,this.#objBall.width,this.#objBall.height);
 
 		// calcula se ela irá bater na parede e mudar de direção
 		if ((this.#x + this.#increment-2 > this.#limitX-this.#radius   && this.#directionX ==   1) ||
@@ -80,14 +83,13 @@ class Ball {
 		}
 
 		// muda a posição X e Y para mover a bola
-		this.#x += this.#increment * this.#directionX;
-		this.#y += this.#increment * this.#directionY;
+		this.#x += (this.#increment-this.#angle) * this.#directionX;
+		this.#y += (this.#increment+this.#angle) * this.#directionY;
 
 		// desenha a bola
 		ctx.arc(this.#x,this.#y,this.#radius,0,Math.PI*2);
 		ctx.fill();
 
-		// animação
 		this.#timer = requestAnimationFrame(this.move.bind(this));
 	}
 }
