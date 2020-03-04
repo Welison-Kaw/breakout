@@ -26,7 +26,7 @@ class Ball {
 		this.#limitX = this.#parent.width + this.#parent.x; // limite da jaula em largura
 		this.#limitY = this.#parent.height + this.#parent.y; // limite da jaula em altura
 
-		this.#angle = 0.8; // temporário para testes
+		this.#angle = 0.2; // temporário para testes
 
 		// Cria o elemento no body
 		this.#objBall = document.createElement("canvas");
