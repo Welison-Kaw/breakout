@@ -53,7 +53,6 @@ class Ball {
 		return this.#directionY;
 	}
 
-
 	// métodos para mudar a direção da bola
 	changeDirectionX() {
 		this.#directionX *= -1;
@@ -61,6 +60,38 @@ class Ball {
 
 	changeDirectionY() {
 		this.#directionY *= -1;
+	}
+
+	// analisa se a bola tocará algo
+
+	willHitX() {
+		// calcula se irá bater na parede e mudar de direção
+		if ((this.#x + this.#increment-2 > this.#limitX-this.#radius   && this.#directionX ==   1) ||
+			(this.#x - this.#increment+2 < this.#parent.x+this.#radius && this.#directionX == - 1)) {
+				return true;
+		}
+
+		// calcula se irá bater no paddle e mudar de direção
+
+		// indo pra baixo
+		if (this.#directionY == 1) {
+			// if (this.#x + this.#radius + this.#increment > this.#parent.bottomPaddle.x)
+			// 	return true;
+			// console.log(this.#x + this.#radius);
+			var teste = this.#parent.bottomPaddle;
+			console.log(teste);
+		}
+		// console.log(this.#directionY);
+		return false;
+	}
+
+	willHitY() {
+		// calcula se irá bater na parede e mudar de direção
+		if ((this.#y + this.#increment-2 > this.#limitY-this.#radius   && this.#directionY ==   1) ||
+			(this.#y - this.#increment+2 < this.#parent.y+this.#radius && this.#directionY == - 1)) {
+				return true;
+		}
+		return false;
 	}
 
 	// método recursivo que move a bola
@@ -71,6 +102,7 @@ class Ball {
 		// limpa o desenho atual da bola
 		ctx.clearRect(0,0,this.#objBall.width,this.#objBall.height);
 
+		/*
 		// calcula se ela irá bater na parede e mudar de direção
 		if ((this.#x + this.#increment-2 > this.#limitX-this.#radius   && this.#directionX ==   1) ||
 			(this.#x - this.#increment+2 < this.#parent.x+this.#radius && this.#directionX == - 1)) {
@@ -80,6 +112,15 @@ class Ball {
 		if ((this.#y + this.#increment-2 > this.#limitY-this.#radius   && this.#directionY ==   1) ||
 			(this.#y - this.#increment+2 < this.#parent.y+this.#radius && this.#directionY == - 1)) {
 				this.#directionY *= -1;
+		}
+		*/
+
+		if (this.willHitX()) {
+			this.changeDirectionX();
+		}
+
+		if (this.willHitY()) {
+			this.changeDirectionY();
 		}
 
 		// muda a posição X e Y para mover a bola

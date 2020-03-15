@@ -65,4 +65,13 @@ class Paddle {
 		ctx.fill();
 
 	}
+
+	get x() {
+		return this.#parent.y+this.#parent.height-this.#height-this.#margin;
+	}
+
+	// teste
+	get position () {
+		return 999;
+	}
 }
